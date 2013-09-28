@@ -4,6 +4,6 @@ divList' former latter = let item = head latter
                             nFormer = former ++ [item]
                             nLatter = tail latter
                             rest = former ++ nLatter
-                        in  (item, former ++ rest):(divList nFormer nLatter)
+                        in  (item, rest):(divList nFormer nLatter)
 
 divList xs = divList' [] xs
