@@ -1,12 +1,15 @@
-module Perm (perm) where
+module Perm (permuteAt) where
 
-import Control.Monad
-import Control.Applicative
+import Factorial
 
-perm :: Eq a => [a] -> [[a]]
-perm [] = [[]]
-perm xs = let
-            lmd x = (x:) <$> (perm $ remove x xs)
-            remove y ys = filter (/= y) ys
-           in
-            xs >>= lmd
+permuteAt x = transFactorialToPerm $ factorial x
+
+transFactorialToPerm :: [Integer] -> [Integer]
+transFactorialToPerm xs = func xs [0 .. (fromIntegral $ length xs)]
+    where
+        func :: [Integer] -> [Integer] -> [Integer]
+        func _ [x] = [x]
+        func (y:ys) s = let (itm, rest) = remove s y in itm:(func ys rest)
+        remove :: [Integer] -> Integer -> (Integer, [Integer])
+        remove zs n = let (former, (l:latter)) = splitAt (fromIntegral n) zs
+                      in (l, former ++ latter)

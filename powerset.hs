@@ -1,6 +1,7 @@
 import Control.Applicative
 
-module PowerSet (powerSet) where
+module PowerSet (powerSet)
+where
 
 powerSet :: [a] -> [[a]]
 powerSet [] = [[]]
